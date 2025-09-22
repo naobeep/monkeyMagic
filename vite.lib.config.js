@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: 'scripts/monkeyMagic.js',
       name: 'MonkeyMagic',
-      fileName: 'animation.utils',
+      fileName: 'monkeyMagic',
       formats: ['es'],
     },
     rollupOptions: {
@@ -21,7 +21,7 @@ export default defineConfig({
         terser({
           format: { beautify: false },
           compress: true,
-          keep_classnames: /MonkeyMagic/,
+          keep_classnames: /MonkeyMagicAnimator/,
         }),
       ],
     },
