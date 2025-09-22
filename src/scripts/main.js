@@ -29,4 +29,38 @@
 
 import { MonkeyMagicAnimator } from "./monkeyMagic.js";
 
-new MonkeyMagicAnimator();
+// ===== 初期化とセットアップ =====
+document.addEventListener('DOMContentLoaded', () => {
+  // デフォルト設定（IntersectionObserver有効）
+  const animator = new MonkeyMagicAnimator();
+  animator.init();
+
+  // グローバル参照を保存（クリーンアップ用）
+  window.monkeyMagicAnimator = animator;
+
+  // カスタム設定の例
+  // const customAnimator = new MonkeyMagicAnimator({
+  //   selector: '.custom-magic',
+  //   thumbnailCount: 8,
+  //   thumbnailDelay: 150,
+  //   animationDuration: 2000,
+  //   threshold: 0.5, // 50%表示されたら発火
+  //   rootMargin: '0px 0px -30% 0px', // 下から30%の位置で発火
+  //   triggerOnce: false // 何度でも実行
+  // });
+  // customAnimator.init();
+
+  // IntersectionObserverを無効にする例
+  // const immediateAnimator = new MonkeyMagicAnimator({
+  //   observerEnabled: false
+  // });
+  // immediateAnimator.init();
+});
+
+// ページ離脱時のクリーンアップ
+window.addEventListener('beforeunload', () => {
+  if (window.monkeyMagicAnimator) {
+    window.monkeyMagicAnimator.destroy();
+  }
+
+});
