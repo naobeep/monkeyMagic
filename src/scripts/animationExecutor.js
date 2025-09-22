@@ -51,6 +51,8 @@ export class AnimationExecutor {
    * @param {Element} originalImage - オリジナル画像要素
    */
   hideOriginalImage(originalImage) {
+    // 既に初期状態で opacity: 0 に設定されているため、
+    // ここでは明示的に再設定（念のため）
     DOMManager.setStyles(originalImage, { opacity: '0' });
   }
 

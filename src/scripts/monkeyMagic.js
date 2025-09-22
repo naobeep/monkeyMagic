@@ -29,11 +29,27 @@ export class MonkeyMagicAnimator {
       return;
     }
 
+    // 初期状態で画像を非表示に設定
+    this.setInitialImageState(targets);
+
     if (this.config.get('observerEnabled')) {
       this.initWithObserver(targets);
     } else {
       this.initImmediate(targets);
     }
+  }
+
+  /**
+   * 初期状態で画像を非表示に設定
+   * @param {NodeList} targets - ターゲット要素リスト
+   */
+  setInitialImageState(targets) {
+    targets.forEach(target => {
+      const originalImage = DOMManager.getOriginalImage(target);
+      if (originalImage) {
+        DOMManager.setStyles(originalImage, { opacity: '0' });
+      }
+    });
   }
 
   /**
@@ -85,16 +101,4 @@ export class MonkeyMagicAnimator {
       this.observerManager = null;
     }
   }
-}
-
-// エクスポート（モジュール環境用）
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    MonkeyMagicAnimator,
-    AnimationConfig,
-    DOMManager,
-    ValidationHelper,
-    AnimationExecutor,
-    IntersectionObserverManager,
-  };
 }
